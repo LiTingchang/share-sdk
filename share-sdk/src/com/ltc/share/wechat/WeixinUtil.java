@@ -41,14 +41,14 @@ public class WeixinUtil {
 	 *
 	 * @param context
 	 */
-	public static void createAndRegisterWX(Context context) {
-		try {
-			wxApi = WXAPIFactory.createWXAPI(context, APP_ID);
-			wxApi.registerApp(APP_ID);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void createAndRegisterWX(Context context) {
+//		try {
+//			wxApi = WXAPIFactory.createWXAPI(context, APP_ID);
+//			wxApi.registerApp(APP_ID);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * 向微信创建注册app，校验签名方式

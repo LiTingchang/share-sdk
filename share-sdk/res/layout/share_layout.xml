@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="72dp"
+    android:orientation="horizontal"
+    android:id="@+id/share_window_root" >
+    
+    <TextView android:id="@+id/share_1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:drawableTop="@drawable/ic_launcher"
+        android:text="微信群" /> 
+           
+    <TextView android:id="@+id/share_2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:drawableTop="@drawable/ic_launcher"
+        android:text="微信群"/>
+    
+    <TextView android:id="@+id/share_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:drawableTop="@drawable/ic_launcher"
+        android:text="QQ"/>
+
+</LinearLayout>

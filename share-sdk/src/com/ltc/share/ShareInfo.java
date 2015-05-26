@@ -11,11 +11,13 @@ public class ShareInfo implements Serializable, Cloneable {
 	public String wxMomentsContent; // 微信朋友圈分享内容
 	public String normalText;// 系统通用分享内容
 	public int resId;
-//	private String iconUrl; // 分享图片url，和shareLogo取其一
+	private String iconUrl; // 分享图片url，和shareLogo取其一
 //	private byte[] shareLogo; // 分享图片，和iconUrl取其一
 //	private String cancelEventId; // 取消的事件ID
 //	private String eventName; // 业务名称
 	private String transaction = ""; // 分享业务ID，用于传递回调依据
+	
+	private String apName;
 
 	@Override
 	public ShareInfo clone() {
@@ -31,7 +33,7 @@ public class ShareInfo implements Serializable, Cloneable {
 	public ShareInfo() {}
 	
 	public ShareInfo(String title, String url, String summary, String wxcontent,
-			String wxMomentsContent, String normalText, int resId, String transaction) {
+			String wxMomentsContent, String normalText, int resId, String iconUrl, String transaction) {
 		this.title = title;
 		this.url = url;
 		this.summary = summary;
@@ -39,12 +41,13 @@ public class ShareInfo implements Serializable, Cloneable {
 		this.wxMomentsContent = wxMomentsContent;
 		this.normalText = normalText;
 		this.resId = resId;
+		this.iconUrl = iconUrl;
 		this.transaction = transaction;
 	}
 	
 	public ShareInfo(String title, String url, String summary, String wxcontent,
-			String wxMomentsContent, String normalText, int resId) {
-		this(title, url, summary, wxcontent, wxMomentsContent, normalText, resId, "");
+			String wxMomentsContent, String normalText, int resId, String iconUrl) {
+		this(title, url, summary, wxcontent, wxMomentsContent, normalText, resId, iconUrl, "");
 	}
 
 	public String getTitle() {
@@ -112,4 +115,24 @@ public class ShareInfo implements Serializable, Cloneable {
 	public void setResId(int resId) {
 		this.resId = resId;
 	}
+
+	public String getIconUrl() {
+		return iconUrl;
+	}
+
+	public void setIconUrl(String iconUrl) {
+		this.iconUrl = iconUrl;
+	}
+
+	public String getApName() {
+		return apName;
+	}
+
+	public void setApName(String apName) {
+		this.apName = apName;
+	}
+	
+	
+	
+	
 }
