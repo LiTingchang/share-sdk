@@ -47,7 +47,8 @@ public class ShareInfo implements Serializable, Cloneable {
 	
 	public ShareInfo(String title, String url, String summary, String wxcontent,
 			String wxMomentsContent, String normalText, int resId, String iconUrl) {
-		this(title, url, summary, wxcontent, wxMomentsContent, normalText, resId, iconUrl, "");
+		this(title, url, summary, wxcontent, wxMomentsContent, normalText, resId, iconUrl, 
+				String.valueOf(System.currentTimeMillis()));
 	}
 
 	public String getTitle() {

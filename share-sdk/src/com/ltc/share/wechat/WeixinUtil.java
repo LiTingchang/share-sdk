@@ -24,10 +24,10 @@ public class WeixinUtil {
 	/**
 	 * 唯一标识，应用的id，在微信开放平台注册时获得
 	 */
-	private static final String APP_ID = "aaaaaaaaaa";
+	private static final String APP_ID = "wxc695ad33898aa66e";
 
-	public static final int WX_SHARE_IMG_THUMB_SIZE = 80; // 微信分享图片尺寸大小
-	public static final int WX_SHARE_IMG_LIMIT = 32 * 1024; // 微信分享图片文件大小限制，32K
+//	public static final int WX_SHARE_IMG_THUMB_SIZE = 80; // 微信分享图片尺寸大小
+//	public static final int WX_SHARE_IMG_LIMIT = 32 * 1024; // 微信分享图片文件大小限制，32K
 	public static final int WX_SHARE_TITLE_LIMIT = 512; // 微信分享标题长度限制
 	public static final int WX_SHARE_DESCRIPTION_LIMIT = 1024; // 微信分享内容长度限制
 
@@ -37,26 +37,12 @@ public class WeixinUtil {
 	private static IWXAPI wxApi;
 
 	/**
-	 * 向微信创建注册app
-	 *
-	 * @param context
-	 */
-//	public static void createAndRegisterWX(Context context) {
-//		try {
-//			wxApi = WXAPIFactory.createWXAPI(context, APP_ID);
-//			wxApi.registerApp(APP_ID);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
-	/**
 	 * 向微信创建注册app，校验签名方式
 	 *
 	 * @param context
 	 * @param checkSign
 	 */
-	public static void createAndRegisterWX(Context context, Boolean checkSign) {
+	private static void createAndRegisterWX(Context context, Boolean checkSign) {
 		try {
 			wxApi = WXAPIFactory.createWXAPI(context, APP_ID, checkSign);
 			wxApi.registerApp(APP_ID);
@@ -127,38 +113,6 @@ public class WeixinUtil {
 		return getWXApi(context).isWXAppSupportAPI();
 	}
 
-	/**
-	 * 微信登录
-	 */
-//	public static void doWXLogin(Context context) {
-//		SendAuth.Req req = new SendAuth.Req();
-//		req.scope = "snsapi_userinfo";
-//		req.state = "jdlogin";
-//
-//		getWXApi(context).sendReq(req);
-//	}
-
-	/**
-	 * 微信支付
-	 *
-	 * @param json
-	 */
-//	public static void doWXPay(Context context, final JSONObject json) {
-//		try {
-//			PayReq req = new PayReq();
-//			req.appId = APP_ID;
-//			req.partnerId = json.getString("partnerId");//商家向财付通申请的商家id
-//			req.prepayId = json.getString("prepayId");//预支付订单
-//			req.nonceStr = json.getString("nonceStr");//随机串，防重发
-//			req.timeStamp = json.getString("timeStamp");//时间戳，防重发
-//			req.packageValue = json.getString("package");//商家根据财付通文档填写的数据和签名
-//			req.sign = json.getString("sign");//商家根据微信开放平台文档对数据做的签名
-//
-//			getWXApi(context).sendReq(req);
-//		} catch (JSONException e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	/**
 	 * 分享前预处理
@@ -188,11 +142,6 @@ public class WeixinUtil {
 
 		WXWebpageObject webPageObj = new WXWebpageObject();
 		webPageObj.webpageUrl = shareInfo.getUrl();
-
-		// 已设置的分享图片为空或过大则使用默认图片
-//		Bitmap shareBitmap = ShareUtil.checkShareBitmap(shareInfo.getShareLogo(),
-//				WX_SHARE_IMG_LIMIT, shareInfo.getEventFrom());
-		
 
 		WXMediaMessage wxMsg = new WXMediaMessage();
 		wxMsg.mediaObject = webPageObj;
