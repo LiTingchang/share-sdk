@@ -2,6 +2,8 @@
 
     <string name="app_name">share-sdk</string>
 
+    <string name="share">分享</string>
+    
     <string name="wx_share_to">分享到</string>
     <string name="wx_share_to_friends">微信好友</string>
     <string name="wx_share_to_friends_circle">微信朋友圈</string>

@@ -3,31 +3,39 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="72dp"
-    android:orientation="horizontal"
-    android:id="@+id/share_window_root" >
+    android:orientation="vertical"
+    android:id="@+id/share_window_root"
+    android:background="@android:color/white" >
     
-    <TextView android:id="@+id/share_1"
-        android:layout_width="0dp"
+    <TextView 
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:drawableTop="@drawable/ic_launcher"
-        android:text="微信群" /> 
+        android:textColor="@color/share_text_color"
+        android:text="@string/share"
+        android:textSize="14sp"
+        android:layout_gravity="center_horizontal"
+        android:padding="13dp" />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:minHeight="52dp"
+	    android:orientation="horizontal"
+	    android:paddingBottom="12dp">
+        <TextView android:id="@+id/share_1"
+        style="@style/share_text"
+        android:drawableTop="@drawable/share_wechat_ic"
+        android:text="微信好友" /> 
            
     <TextView android:id="@+id/share_2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:drawableTop="@drawable/ic_launcher"
-        android:text="微信群"/>
+        style="@style/share_text"
+        android:drawableTop="@drawable/share_friends_ic"
+        android:text="朋友圈"/>
     
     <TextView android:id="@+id/share_3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:drawableTop="@drawable/ic_launcher"
+        style="@style/share_text"
+        android:drawableTop="@drawable/share_qq_ic"
         android:text="QQ"/>
+    </LinearLayout>
 
 </LinearLayout>
