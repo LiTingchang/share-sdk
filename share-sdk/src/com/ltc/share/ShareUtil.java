@@ -11,6 +11,7 @@ import android.view.WindowManager;
 
 import com.ltc.share.qq.QQUtil;
 import com.ltc.share.wechat.WeixinUtil;
+import com.tencent.tauth.UiError;
 
 public class ShareUtil {
 
@@ -31,7 +32,7 @@ public class ShareUtil {
 		return instance;
 	}
 
-	public void showShareWindow(final Activity context, final ShareInfo shareInfo) {
+	public void showShareWindow(final Activity context, final ShareInfo shareInfo, final ShareListener listener) {
 
 		View rootView = (ViewGroup) LayoutInflater.from(context).inflate(
 				R.layout.share_layout, null);
@@ -73,9 +74,17 @@ public class ShareUtil {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						QQUtil.getInstance().shareToQQ(context, shareInfo);
+						QQUtil.getInstance().shareToQQ(context, shareInfo, listener);
 						alertDialog.dismiss();
 					}
 				});
+	}
+	
+	public interface ShareListener { 
+		public void onComplete();
+
+		public void onError(String errorMessage);
+
+		public void onCancel();
 	}
 }

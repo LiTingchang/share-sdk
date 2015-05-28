@@ -6,11 +6,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.ltc.share.R;
 import com.ltc.share.ShareInfo;
 import com.ltc.share.ShareUtil;
+import com.ltc.share.ShareUtil.ShareListener;
+import com.tencent.connect.share.QQShare;
 import com.tencent.connect.share.QzoneShare;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
@@ -71,23 +71,21 @@ public class QQUtil {
 	 * @param activity
 	 * @param shareInfo
 	 */
-	public void shareToQQ(Activity activity, ShareInfo shareInfo) {
+	public void shareToQQ(Activity activity, ShareInfo shareInfo, ShareUtil.ShareListener listener) {
 		prepareForShareToQQ(shareInfo);
 
 		final Bundle params = new Bundle();
-		params.putInt(com.tencent.connect.share.QQShare.SHARE_TO_QQ_KEY_TYPE, com.tencent.connect.share.QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
-		params.putInt(com.tencent.connect.share.QQShare.SHARE_TO_QQ_EXT_INT, com.tencent.connect.share.QQShare.SHARE_TO_QQ_FLAG_QZONE_ITEM_HIDE);
-		params.putString(com.tencent.connect.share.QQShare.SHARE_TO_QQ_TARGET_URL, shareInfo.getUrl());
-		params.putString(com.tencent.connect.share.QQShare.SHARE_TO_QQ_TITLE, shareInfo.getTitle());
-		params.putString(com.tencent.connect.share.QQShare.SHARE_TO_QQ_SUMMARY, shareInfo.getSummary());
-		params.putString(com.tencent.connect.share.QQShare.SHARE_TO_QQ_IMAGE_URL, shareInfo.getIconUrl());
-		params.putString(com.tencent.connect.share.QQShare.SHARE_TO_QQ_APP_NAME, shareInfo.getApName());
+		params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+		params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_ITEM_HIDE);
+		params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, shareInfo.getUrl());
+		params.putString(QQShare.SHARE_TO_QQ_TITLE, shareInfo.getTitle());
+		params.putString(QQShare.SHARE_TO_QQ_SUMMARY, shareInfo.getSummary());
+		params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, shareInfo.getIconUrl());
+		params.putString(QQShare.SHARE_TO_QQ_APP_NAME, shareInfo.getApName());
 
-		QQUtil.BaseUiListener listener = new QQUtil.BaseUiListener();
-		listener.flag = F_QQ;
-		listener.transaction = shareInfo.getTransaction();
+		QQUtil.BaseUiListener baseUiListener = new QQUtil.BaseUiListener(listener);
 
-		getTencentInstance(activity).shareToQQ(activity, params, listener);
+		getTencentInstance(activity).shareToQQ(activity, params, baseUiListener);
 	}
 
 	/**
@@ -96,7 +94,7 @@ public class QQUtil {
 	 * @param activity
 	 * @param shareInfo
 	 */
-	public void shareToQzone(Activity activity, ShareInfo shareInfo) {
+	public void shareToQzone(Activity activity, ShareInfo shareInfo, ShareUtil.ShareListener listener) {
 		prepareForShareToQzone(shareInfo);
 
 		ArrayList<String> imgUrlList = new ArrayList();
@@ -111,33 +109,40 @@ public class QQUtil {
 		params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, shareInfo.getUrl());
 		params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imgUrlList);
 
-		QQUtil.BaseUiListener listener = new BaseUiListener();
-		listener.flag = F_QZONE;
-		listener.transaction = shareInfo.getTransaction();
+		QQUtil.BaseUiListener baseUiListener = new BaseUiListener(listener);
 
-		getTencentInstance(activity).shareToQzone(activity, params, listener);
+		getTencentInstance(activity).shareToQzone(activity, params, baseUiListener);
 	}
 
 	/**
 	 * 分享回调接口
 	 */
 	private static class BaseUiListener implements IUiListener {
-		public String flag; // 分享的渠道
-		public String transaction; // 分享事务ID，作为回调凭证
+		
+		ShareListener listener;
+		public BaseUiListener(ShareListener listener) {
+			this.listener = listener;
+		}
 
 		@Override
 		public void onComplete(Object obj) {
-//			ShareUtil.shareComplete(transaction, flag);
+			if(listener != null) {
+				listener.onComplete();
+			}
 		}
 
 		@Override
 		public void onError(UiError e) {
-//			ShareUtil.shareError(transaction, e.errorMessage, flag);
+			if(listener != null) {
+				listener.onError(e.errorMessage);
+			}
 		}
 
 		@Override
 		public void onCancel() {
-//			ShareUtil.shareCancel(transaction, flag);
+			if(listener != null) {
+				listener.onCancel();
+			}
 		}
 	}
 
