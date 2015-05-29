@@ -74,7 +74,7 @@ public class ShareUtil {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						QQUtil.getInstance().shareToQQ(context, shareInfo, listener);
+						QQUtil.getInstance(context).shareToQQ(context, shareInfo, listener);
 						alertDialog.dismiss();
 					}
 				});

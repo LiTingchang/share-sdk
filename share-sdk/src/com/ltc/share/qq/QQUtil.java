@@ -35,34 +35,24 @@ public class QQUtil {
 
 	private static QQUtil mSelf;
 
-	private static Tencent mTencent;
+	private Tencent mTencent;
+	
+	private QQUtil() {
+	}
+	
+	private QQUtil(Context context) {
+		mTencent  = Tencent.createInstance(APP_ID, context);
+	}
 
-	public static QQUtil getInstance() {
+	public static QQUtil getInstance(Context context) {
 		if (mSelf == null) {
-			mSelf = new QQUtil();
+			synchronized (QQUtil.class) {
+				if(mSelf == null) {
+					mSelf = new QQUtil(context);
+				}
+			}
 		}
 		return mSelf;
-	}
-
-	/**
-	 * 创建Tencent实例
-	 *
-	 * @param context
-	 */
-	public static void createTencentInstance(Context context) {
-		mTencent = Tencent.createInstance(APP_ID, context);
-	}
-
-	/**
-	 * 获得Tencent实例
-	 *
-	 * @return
-	 */
-	public static Tencent getTencentInstance(Context context) {
-		if (mTencent == null) {
-			createTencentInstance(context);
-		}
-		return mTencent;
 	}
 
 	/**
@@ -85,7 +75,7 @@ public class QQUtil {
 
 		QQUtil.BaseUiListener baseUiListener = new QQUtil.BaseUiListener(listener);
 
-		getTencentInstance(activity).shareToQQ(activity, params, baseUiListener);
+		mTencent.shareToQQ(activity, params, baseUiListener);
 	}
 
 	/**
@@ -111,7 +101,7 @@ public class QQUtil {
 
 		QQUtil.BaseUiListener baseUiListener = new BaseUiListener(listener);
 
-		getTencentInstance(activity).shareToQzone(activity, params, baseUiListener);
+		mTencent.shareToQzone(activity, params, baseUiListener);
 	}
 
 	/**
