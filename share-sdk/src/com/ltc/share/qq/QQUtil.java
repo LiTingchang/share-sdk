@@ -12,6 +12,7 @@ import com.ltc.share.ShareUtil;
 import com.ltc.share.ShareUtil.ShareListener;
 import com.tencent.connect.share.QQShare;
 import com.tencent.connect.share.QzoneShare;
+import com.tencent.map.b.n;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -53,6 +54,10 @@ public class QQUtil {
 			}
 		}
 		return mSelf;
+	}
+	
+	public Tencent getTencentInstance() {
+		return mTencent;
 	}
 
 	/**
