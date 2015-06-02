@@ -24,7 +24,7 @@ public class WeixinUtil {
 	/**
 	 * 唯一标识，应用的id，在微信开放平台注册时获得
 	 */
-	private static final String APP_ID = "wxc695ad33898aa66e"; // wxc695ad33898aa66e test
+	private static final String APP_ID = "wx3eb0653016cb6935"; // wxc695ad33898aa66e test  wx3eb0653016cb6935
 
 //	public static final int WX_SHARE_IMG_THUMB_SIZE = 80; // 微信分享图片尺寸大小
 //	public static final int WX_SHARE_IMG_LIMIT = 32 * 1024; // 微信分享图片文件大小限制，32K

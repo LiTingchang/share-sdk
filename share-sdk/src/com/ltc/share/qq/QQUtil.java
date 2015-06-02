@@ -32,7 +32,7 @@ public class QQUtil {
 	/**
 	 * 唯一标识，应用的id，在QQ开放平台注册时获得
 	 */
-	private static final String APP_ID = "appid";
+	private static final String APP_ID = "1104672822";
 
 	private static QQUtil mSelf;
 
